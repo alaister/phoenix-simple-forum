@@ -1,0 +1,12 @@
+<div class="comment clearfix">
+  <div class="content">
+    <p class="comment_content"><%= @comment.comment %></p>
+    <p class="comment_author"><%= @comment.user.name %></p>
+  </div>
+  <%= if @comment.user_id == @current_user_id do %>
+    <div class="buttons">
+      <%= link "Edit", to: post_comment_path(@conn, :edit, @post, @comment) %>
+      <%= link "Delete", to: post_comment_path(@conn, :delete, @post, @comment), method: :delete, data: [confirm: "Are you sure?"] %>
+    </div>
+  <% end %>
+</div>

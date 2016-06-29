@@ -1,0 +1,10 @@
+<div class="white-background">
+  <h2>Edit Comment</h2>
+  <%= form_for @changeset, post_comment_path(@conn, :update, @post, @comment), fn f -> %>
+
+    <%= textarea f, :comment %>
+    <%= error_tag f, :comment %>
+
+    <%= submit "Comment" %>
+  <% end %>
+</div>

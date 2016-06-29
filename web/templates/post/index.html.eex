@@ -1,0 +1,8 @@
+<div id="posts">
+  <%= for post <- @posts do %>
+  <div class="post">
+    <h2 class="title"><%= link post.title, to: post_path(@conn, :show, post) %></h2>
+    <p class="date">Published <%= time_ago_in_words(post.inserted_at) %> by <%= post.user.name %></p>
+  </div>
+<% end %>
+</div>

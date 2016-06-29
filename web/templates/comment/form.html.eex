@@ -1,0 +1,7 @@
+<h3>Reply to thread</h3>
+<%= form_for @changeset, @action, fn f -> %>
+
+  <%= textarea f, :comment %>
+
+  <%= submit "Comment" %>
+<% end %>

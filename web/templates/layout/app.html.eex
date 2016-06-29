@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Phoenix Forum</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <header class="main_header clearfix">
+      <div class="wrapper">
+        <div id="logo"><p><%= link "Alaister's Phoenix Forum", to: home_path(@conn, :index) %></p></div>
+        <div id="buttons">
+          <%= if @current_user do %>
+            <%= link "New Post", to: post_path(@conn, :new), class: "new-post-button" %>
+            <%= link "Logout", to: logout_path(@conn, :delete), method: :delete, class: "logout-button" %>
+          <% else %>
+            <%= link "Register", to: register_path(@conn, :new) %>
+            <%= link "Login", to: login_path(@conn, :new) %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    
+    <div class="wrapper">
+      <%= if get_flash(@conn, :info) || get_flash(@conn, :error) do %>
+        <%= if get_flash(@conn, :info) do %>
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= if get_flash(@conn, :error) do %>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
+      <% else %>
+        <p></p>
+        <p></p>
+      <% end %>
+    </div>
+    
+    <div class="wrapper">
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+    </div>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

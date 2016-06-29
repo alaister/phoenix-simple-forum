@@ -1,0 +1,4 @@
+<div class="white-background">
+  <h1>New Post</h1>
+  <%= render "form.html", changeset: @changeset, action: post_path(@conn, :create) %>
+</div>

@@ -1,0 +1,14 @@
+<div class="white-background">
+  <h1>Login</h1>
+  <%= form_for @conn, login_path(@conn, :create), [as: :session], fn f -> %>
+    <%= label f, :email, "Email:" %>
+    <%= text_input f, :email %>
+    <%= error_tag f, :email %>
+
+    <%= label f, :password, "Password:" %>
+    <%= password_input f, :password %>
+    <%= error_tag f, :password %>
+
+    <%= submit "Log in" %>
+  <% end %>
+</div>

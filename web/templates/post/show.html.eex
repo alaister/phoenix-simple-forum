@@ -1,0 +1,30 @@
+<div id="post_content_content">
+  <h1><%= @post.title %></h1>
+  <p><%= @post.content %></p>
+  <div id="comments">
+    <h2><%= Enum.count(@comments) %> Comments</h2>
+    <%= for comment <- @comments do %>
+      <%= if @current_user do  %>
+        <%= render Forum.CommentView, "comment.html", comment: comment, conn: @conn, post: @post, current_user_id: @current_user.id %>
+      <% else %>
+        <%= render Forum.CommentView, "comment.html", comment: comment, conn: @conn, post: @post, current_user_id: nil %>
+      <% end %>
+    <% end %>
+    <%= if @current_user do  %>
+      <%= render Forum.CommentView, "form.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
+    <% end %>
+  </div>
+
+  <%= if @current_user do %>
+    <%= if @post.user_id == @current_user.id do %>
+      <br>
+      <hr>
+      <br>
+      <div class="manage-buttons">
+        <%= link "Edit", to: post_path(@conn, :edit, @post), class: "button" %>
+        <%= link "Delete", to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "button" %>
+      </div>
+    <% end %>
+  <% end %>
+  
+</div>
