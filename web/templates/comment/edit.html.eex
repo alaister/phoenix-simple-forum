@@ -5,6 +5,6 @@
     <%= textarea f, :comment %>
     <%= error_tag f, :comment %>
 
-    <%= submit "Comment" %>
+    <%= submit "Save Comment" %>
   <% end %>
 </div>

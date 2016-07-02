@@ -1,7 +1,7 @@
 <div class="comment clearfix">
   <div class="content">
     <p class="comment_content"><%= @comment.comment %></p>
-    <p class="comment_author"><%= @comment.user.name %></p>
+    <p class="comment_author"><%= @comment.user.name %> (<%= time_ago_in_words(@comment.inserted_at) %>)</p>
   </div>
   <%= if @comment.user_id == @current_user_id do %>
     <div class="buttons">

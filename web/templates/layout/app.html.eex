@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Phoenix Forum</title>
+    <title>Simple Phoenix Forum</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
@@ -16,7 +16,7 @@
   <body>
     <header class="main_header clearfix">
       <div class="wrapper">
-        <div id="logo"><p><%= link "Alaister's Phoenix Forum", to: home_path(@conn, :index) %></p></div>
+        <div id="logo"><p><%= link "Simple Phoenix Forum", to: home_path(@conn, :index) %></p></div>
         <div id="buttons">
           <%= if @current_user do %>
             <%= link "New Post", to: post_path(@conn, :new), class: "new-post-button" %>

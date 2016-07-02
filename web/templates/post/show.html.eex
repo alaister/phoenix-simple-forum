@@ -2,8 +2,8 @@
   <h1><%= @post.title %></h1>
   <p><%= @post.content %></p>
   <div id="comments">
-    <h2><%= Enum.count(@comments) %> Comments</h2>
-    <%= for comment <- @comments do %>
+    <h2><%= Enum.count(@post.comments) %> Comments</h2>
+    <%= for comment <- @post.comments do %>
       <%= if @current_user do  %>
         <%= render Forum.CommentView, "comment.html", comment: comment, conn: @conn, post: @post, current_user_id: @current_user.id %>
       <% else %>

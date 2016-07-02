@@ -8,16 +8,24 @@ defmodule Forum.PostController do
   plug :authenticate_user when action in [:new, :create, :edit, :delete]
 
   def index(conn, _params) do
-    query = from p in Post, order_by: [desc: p.inserted_at], join: u in assoc(p, :user), preload: [:user]
+    query = from p in Post, order_by: [desc: p.inserted_at], join: u in assoc(p, :user), preload: [user: u]
     posts = Repo.all(query)
     render conn, "index.html", posts: posts
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.preload(Repo.get(Post, id), [:comments])
-    comments = Repo.preload(post.comments, [:user])
+    post_query = from p in Post,
+                 where: p.id == ^id,
+                 join: c in assoc(p, :comments),
+                 join: u in assoc(c, :user),
+                 preload: [comments: {c, user: u}]
+                 
+                 #select: %{title: p.title, content: p.content, inserted_at: p.inserted_at, comments: p.comments}
+
+    post = Repo.one(post_query)
+
     comment_changeset = Comment.changeset(%Comment{})
-    render(conn, "show.html", post: post, comments: comments, comment_changeset: comment_changeset)
+    render(conn, "show.html", post: post, comment_changeset: comment_changeset)
   end
 
   def new(conn, _params) do

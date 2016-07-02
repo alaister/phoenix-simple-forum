@@ -6,8 +6,13 @@ defmodule Forum.CommentController do
   plug :authenticate_user when action in [:create, :edit, :update, :delete]
 
   def create(conn, %{"post_id" => id, "comment" => comment_params}) do
-    post = Repo.get(Post, id) |> Repo.preload(:comments)
-    comments = post.comments |> Repo.preload(:user)
+    post_query = from p in Post,
+                 where: p.id == ^id,
+                 join: c in assoc(p, :comments),
+                 join: u in assoc(c, :user),
+                 preload: [comments: {c, user: u}]
+
+    post = Repo.one(post_query)
     changeset =
       post
         |> build_assoc(:comments, user_id: conn.assigns.current_user.id)
@@ -21,7 +26,7 @@ defmodule Forum.CommentController do
           {:error, changeset} ->
             conn
               |> put_flash(:error, "Comment must have a body!")
-              |> render(Forum.PostView, "show.html", comment_changeset: changeset, post: post, comments: comments)
+              |> render(Forum.PostView, "show.html", comment_changeset: changeset, post: post)
       end
   end
 
