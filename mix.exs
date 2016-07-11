@@ -39,7 +39,10 @@ defmodule Forum.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.5"},
-     {:timex, "~> 2.2"}]
+     {:timex, "~> 2.2"},
+     {:scrivener, "~> 2.0"},
+     {:scrivener_ecto, "~> 1.0"},
+     {:scrivener_html, "~> 1.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

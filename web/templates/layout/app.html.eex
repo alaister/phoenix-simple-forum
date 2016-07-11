@@ -33,10 +33,10 @@
     <div class="wrapper">
       <%= if get_flash(@conn, :info) || get_flash(@conn, :error) do %>
         <%= if get_flash(@conn, :info) do %>
-          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-info" role="alert"><%= String.capitalize(get_flash(@conn, :info)) %></p>
         <% end %>
         <%= if get_flash(@conn, :error) do %>
-          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+          <p class="alert alert-danger" role="alert"><%= String.capitalize(get_flash(@conn, :error)) %></p>
         <% end %>
       <% else %>
         <p></p>

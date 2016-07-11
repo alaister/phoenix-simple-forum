@@ -20,6 +20,7 @@ defmodule Forum.User do
       |> cast(params, [:name, :email])
       |> validate_required([:name, :email])
       |> validate_length(:email, min: 1, max: 20)
+      |> validate_format(:email, ~r/@/)
       |> unique_constraint(:email)
   end
 

@@ -22,6 +22,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :scrivener_html,
+  routes_helper: Forum.Router.Helpers
+
 # Configure phoenix generators
 config :phoenix, :generators,
   binary_id: true

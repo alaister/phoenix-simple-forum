@@ -5,4 +5,7 @@
     <p class="date">Published <%= time_ago_in_words(post.inserted_at) %> by <%= post.user.name %></p>
   </div>
 <% end %>
+  <div class="align-center">
+    <%= pagination_links @conn, @posts, next: "»", previous: "«", first: true, last: true, view_style: :bootstrap %>
+  </div>
 </div>

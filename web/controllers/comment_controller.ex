@@ -8,9 +8,7 @@ defmodule Forum.CommentController do
   def create(conn, %{"post_id" => id, "comment" => comment_params}) do
     post_query = from p in Post,
                  where: p.id == ^id,
-                 join: c in assoc(p, :comments),
-                 join: u in assoc(c, :user),
-                 preload: [comments: {c, user: u}]
+                 preload: [comments: :user]
 
     post = Repo.one(post_query)
     changeset =
